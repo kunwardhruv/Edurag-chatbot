@@ -35,74 +35,29 @@ and answers with **page citations**. If the answer isn't in the book, it says so
 
 ## 🏗️ Architecture
 
-PDF Upload
+```mermaid
+flowchart TD
+    A[📄 PDF Upload] --> B[PyMuPDF\nExtract text page-by-page]
+    B --> C[LangChain\nRecursiveCharacterTextSplitter\nchunk size=1000, overlap=200]
+    C --> D[HuggingFace\nall-MiniLM-L6-v2\n384-dim embeddings]
+    D --> E[(FAISS IndexFlatIP\nVector Store)]
+    D --> F[(BM25Okapi\nKeyword Index)]
 
-│
+    G[🔍 User Query] --> H[Embed Query\nall-MiniLM-L6-v2]
+    H --> I[FAISS Search\nTop-20 by cosine sim]
+    H --> J[BM25 Search\nTop-20 by keyword match]
+    I --> K[Reciprocal Rank Fusion\n60% Vector + 40% BM25]
+    J --> K
+    K --> L[Top-6 Chunks\nsorted by page number]
+    L --> M{Similarity Score\n≥ 0.25?}
+    M -- No --> N[❌ Not in book]
+    M -- Yes --> O[Groq Llama-3.3-70B\nstrict context-only prompt]
+    O --> P[✅ Answer + Page Citations]
+    P --> Q[(SQLite\nQ&A History)]
 
-▼
-
-PyMuPDF          ← Extract text page-by-page with metadata (page_num, has_images)
-
-│
-
-▼
-
-RecursiveCharacterTextSplitter  ← Chunk text (size=1000, overlap=200)
-
-│
-
-▼
-
-all-MiniLM-L6-v2 (HuggingFace)  ← Generate embeddings (384-dim, normalized)
-
-│
-
-├──► FAISS IndexFlatIP       ← Vector store (cosine similarity via inner product)
-
-└──► BM25Okapi               ← Keyword index (rebuilt on load)
-
-│
-
-▼
-
-User Query
-
-│
-
-├──► FAISS search (top-20) ──┐
-
-└──► BM25 search  (top-20) ──┤
-
-▼
-
-Reciprocal Rank Fusion
-
-(weighted: 60% vector + 40% BM25)
-
-│
-
-▼
-
-Top-6 chunks (sorted by page number)
-
-│
-
-▼
-
-Similarity threshold check (< 0.25 → "not in book")
-
-│
-
-▼
-
-Groq Llama-3.3-70B (strict context-only prompt)
-
-│
-
-▼
-
-Answer + Page Citations + Save to SQLite
-
+    E --> I
+    F --> J
+```
 ---
 
 ## 🛠️ Tech Stack
@@ -193,8 +148,9 @@ edurag/
 ```
 
 ## 🚀 Local Setup
+
+### 1. Prerequisites
 ```
-### Prerequisites
 - Python 3.10+
 - Node.js 18+
 - Free Groq API key → [console.groq.com](https://console.groq.com)

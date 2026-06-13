@@ -34,7 +34,7 @@ and answers with **page citations**. If the answer isn't in the book, it says so
 ---
 
 ## 🏗️ Architecture
-```
+
 PDF Upload
 
 │

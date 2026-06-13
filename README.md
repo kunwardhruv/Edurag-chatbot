@@ -189,10 +189,11 @@ edurag/
 
 └── tailwind.config.ts
 
----
-```
-## 🚀 Local Setup
 
+```
+
+## 🚀 Local Setup
+```
 ### Prerequisites
 - Python 3.10+
 - Node.js 18+

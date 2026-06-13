@@ -34,7 +34,7 @@ and answers with **page citations**. If the answer isn't in the book, it says so
 ---
 
 ## 🏗️ Architecture
-
+```
 PDF Upload
 
 │
@@ -102,9 +102,9 @@ Groq Llama-3.3-70B (strict context-only prompt)
 ▼
 
 Answer + Page Citations + Save to SQLite
-
+```
 ---
-
+```
 ## 🛠️ Tech Stack
 
 ### Backend

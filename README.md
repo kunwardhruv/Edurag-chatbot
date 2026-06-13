@@ -190,7 +190,7 @@ edurag/
 └── tailwind.config.ts
 
 ---
-
+```
 ## 🚀 Local Setup
 
 ### Prerequisites

@@ -55,6 +55,24 @@ flowchart TD
     P --> Q[(SQLite\nQ&A History)]
     E --> I
     F --> J
+
+    style A fill:#f59e0b,color:#000
+    style B fill:#3b82f6,color:#fff
+    style C fill:#3b82f6,color:#fff
+    style D fill:#3b82f6,color:#fff
+    style E fill:#8b5cf6,color:#fff
+    style F fill:#8b5cf6,color:#fff
+    style G fill:#f59e0b,color:#000
+    style H fill:#3b82f6,color:#fff
+    style I fill:#3b82f6,color:#fff
+    style J fill:#3b82f6,color:#fff
+    style K fill:#f59e0b,color:#000
+    style L fill:#10b981,color:#fff
+    style M fill:#f59e0b,color:#000
+    style N fill:#ef4444,color:#fff
+    style O fill:#ef4444,color:#fff
+    style P fill:#10b981,color:#fff
+    style Q fill:#8b5cf6,color:#fff
 ```
 
 ---
